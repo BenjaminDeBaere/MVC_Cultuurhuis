@@ -1,0 +1,49 @@
+﻿@model MVC_Cultuurhuis.Models.Voorstelling
+@{
+    ViewBag.Title = "Reserveren";
+}
+<h1>Het Cultuurhuis <img src="~/Images/reserveren.png" alt="Reserveren" /></h1>
+
+<br />
+
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tickets kiezen &raquo;</a>
+<div class="border"></div>
+<p class="alert alert-info">Aantal tickets voor deze voorstelling</p>
+
+<form class="form-horizontal" method="post" action="~/Home/ReservatieBevestigen/@Model.VoorstellingsNr">
+    <div class="form-group">
+        <div class="col col-md-2">@Html.LabelFor(m => Model.Titel)</div>
+        <div class="col col-md-10"><p class="form-control-static">@Html.DisplayFor(m => Model.Titel)</p></div>        
+    </div>
+    <div class="form-group">
+        <div class="col col-md-2">@Html.LabelFor(m => Model.Uitvoerders)</div>
+        <div class="col col-md-10"><p class="form-control-static">@Html.DisplayFor(m => Model.Uitvoerders)</p></div>        
+    </div>
+    <div class="form-group">
+        <div class="col col-md-2">@Html.LabelFor(m => Model.Datum)</div>
+        <div class="col col-md-10"><p class="form-control-static">@Html.DisplayFor(m => Model.Datum)</p></div>
+    </div>
+    <div class="form-group">
+        <div class="col col-md-2">@Html.LabelFor(m => m.Prijs)</div>
+        <div class="col col-md-10"><p class="form-control-static">@Html.DisplayFor(m => m.Prijs)</p></div>
+    </div>
+    <div class="form-group">
+        <div class="col col-md-2">@Html.Label("Vrije plaatsen")</div>
+        <div class="col col-md-10"><p class="form-control-static">@Html.DisplayFor(m => m.VrijePlaatsen)</p></div>        
+    </div>
+    <div class="form-group">
+        <div class="col col-md-2">@Html.Label("Plaatsen")</div>
+        <input class="form-control col-md-10" type="number" value="@ViewBag.aantalReserveringen" name="AantalGereserveerdePlaatsen" required="required" min="1" max="@Model.VrijePlaatsen"/>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <input type="submit" value="Reserveren" class="btn btn-default" />
+        </div>
+    </div>
+</form>
+
+
+
+
+

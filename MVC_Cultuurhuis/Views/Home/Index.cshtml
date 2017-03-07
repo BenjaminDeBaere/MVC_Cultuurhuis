@@ -1,0 +1,65 @@
+﻿@model MVC_Cultuurhuis.Models.VoorstellingViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<h1>Het Cultuurhuis<img src="~/Images/voorstellingen.png" alt="Borstbeeld shakespeare" /></h1>
+
+@if (Model.Genre == null)
+{
+    <div class="alert alert-info">Kies een voorstellingsgenre</div>
+}
+
+<nav class="nav nav-justified">
+    @foreach (var item in Model.Genres)
+    {
+        <button>@Html.ActionLink(item.Naam, "Index", "Home", new { id = item.GenreNr }, null)</button>
+    }
+</nav>
+
+@if (Model.Genre != null)
+{
+    if (Model.Voorstellingen.Count != 0)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Titel</th>
+                    <th>uitvoerders</th>
+                    <th>Prijs</th>
+                    <th>Vrije plaatsen</th>
+                    <th>Reserveren</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Voorstellingen)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Datum)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Titel)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Uitvoerders)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Prijs)</td>
+                        <td>@Html.DisplayFor(modelItem => item.VrijePlaatsen)</td>
+                        @{
+                            if (item.VrijePlaatsen == 0)
+                            {
+                                <td ><p class="label label-danger">Uitverkocht</p></td>
+                            }
+                            else
+                            {
+                                <td><a href="@Url.Action("ReserveerForm", "Home", new { ID=item.VoorstellingsNr }, null)" >Reserveren</a></td>
+                            }
+                        }
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+          <br />
+          <p class="text text-warning">Er zijn geen voorstellingen van dit genre beschikbaar</p>
+    }
+
+}

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MVC_Cultuurhuis.Models.VoorstellingReservatie>
+
+@{
+    ViewBag.Title = "Reservatie Bevestigen";
+}
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Tickets kiezen &raquo;</a>
+<button class="btn btn-primary">Kassa &raquo;</button>
+<div class="border"></div>
+<p class="alert alert-info">Inhoud van uw winkelmandje</p>
+@using (Html.BeginForm("ReservatieVerwijderen", "Home", FormMethod.Post))
+{
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Titel</th>
+            <th>Uitvoerders</th>
+            <th>Prijs</th>
+            <th>Plaatsen</th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Datum)</td>@Html.HiddenFor(modelItem => item.Datum)
+                <td>@Html.DisplayFor(modelItem => item.Titel)</td>@Html.HiddenFor(modelItem => item.Titel)
+                <td>@Html.DisplayFor(modelItem => item.Uitvoerders)</td>@Html.HiddenFor(modelItem => item.Uitvoerders)
+                <td>@Html.DisplayFor(modelItem => item.Prijs)</td>@Html.HiddenFor(modelItem => item.Prijs)
+                <td>@Html.DisplayFor(modelItem => item.Plaatsen)</td>@Html.HiddenFor(modelItem => item.Plaatsen)
+                <td>@Html.CheckBoxFor(modelItem => item.TeVerwijderen)</td>
+            </tr>
+            }
+    </tbody>    
+</table>
+<input type="submit"  value="Verwijderen" />
+}
+
+
